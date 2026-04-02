@@ -1,0 +1,119 @@
+{
+  "common": {
+    "loading": "লোড হচ্ছে...",
+    "error": "কিছু ভুল হয়েছে",
+    "success": "সফল",
+    "cancel": "বাতিল করুন",
+    "confirm": "নিশ্চিত করুন",
+    "save": "সংরক্ষণ করুন",
+    "delete": "মুছুন",
+    "close": "বন্ধ করুন",
+    "back": "ফিরে যান",
+    "submit": "জমা দিন",
+    "search": "অনুসন্ধান করুন",
+    "noResults": "কোনো ফলাফল পাওয়া যায়নি"
+  },
+  "nav": {
+    "home": "হোম",
+    "products": "ওষুধ",
+    "cart": "কার্ট",
+    "orders": "অর্ডার",
+    "profile": "প্রোফাইল",
+    "admin": "অ্যাডমিন",
+    "logout": "লগআউট",
+    "login": "লগইন",
+    "register": "রেজিস্টার"
+  },
+  "home": {
+    "hero_title": "অনলাইনে ওষুধ কিনুন",
+    "hero_subtitle": "আসল ওষুধের জন্য আপনার বিশ্বস্ত অনলাইন ফার্মেসি",
+    "featured": "বৈশিষ্ট্যপূর্ণ পণ্য",
+    "categories": "শ্রেণী অনুযায়ী ব্রাউজ করুন",
+    "viewAll": "সব দেখুন"
+  },
+  "products": {
+    "title": "ওষুধ",
+    "search_placeholder": "ওষুধ খুঁজুন...",
+    "in_stock": "স্টকে আছে",
+    "out_of_stock": "স্টকে নেই",
+    "add_to_cart": "কার্টে যোগ করুন",
+    "requires_prescription": "প্রেসক্রিপশন প্রয়োজন",
+    "view_details": "বিস্তারিত দেখুন",
+    "price": "দাম",
+    "quantity": "পরিমাণ"
+  },
+  "cart": {
+    "title": "আপনার কার্ট",
+    "empty": "আপনার কার্ট খালি",
+    "subtotal": "উপ-মোট",
+    "shipping": "শিপিং",
+    "total": "মোট",
+    "checkout": "চেকআউট করুন",
+    "free_shipping": "₹299 এর বেশি অর্ডারে ফ্রি শিপিং",
+    "remove": "সরান",
+    "continue_shopping": "কেনাকাটা চালিয়ে যান"
+  },
+  "checkout": {
+    "title": "চেকআউট",
+    "shipping_address": "শিপিং ঠিকানা",
+    "payment_method": "পেমেন্ট পদ্ধতি",
+    "cod": "ক্যাশ অন ডেলিভারি",
+    "place_order": "অর্ডার দিন",
+    "order_success": "অর্ডার সফলভাবে দেওয়া হয়েছে!",
+    "order_number": "অর্ডার নম্বর",
+    "thank_you": "আপনার অর্ডারের জন্য ধন্যবাদ"
+  },
+  "orders": {
+    "title": "আপনার অর্ডার",
+    "empty": "এখনও কোনো অর্ডার নেই",
+    "view_details": "বিস্তারিত দেখুন",
+    "cancel_order": "অর্ডার বাতিল করুন",
+    "cancel_reason": "বাতিলের কারণ নির্বাচন করুন",
+    "cancel_success": "অর্ডার সফলভাবে বাতিল হয়েছে",
+    "cancel_requested": "বাতিলের অনুরোধ মঞ্জুরের অপেক্ষায়",
+    "status_placed": "দেওয়া হয়েছে",
+    "status_confirmed": "নিশ্চিত",
+    "status_shipped": "পাঠানো হয়েছে",
+    "status_delivered": "পৌঁছে গেছে",
+    "status_cancelled": "বাতিল",
+    "status_cancel_requested": "বাতিলের অনুরোধ"
+  },
+  "profile": {
+    "title": "প্রোফাইল",
+    "edit": "প্রোফাইল সম্পাদনা করুন",
+    "language": "পছন্দের ভাষা",
+    "change_password": "পাসওয়ার্ড পরিবর্তন করুন",
+    "verify_email": "ইমেইল যাচাই করুন",
+    "first_name": "প্রথম নাম",
+    "last_name": "শেষ নাম",
+    "email": "ইমেইল",
+    "phone": "ফোন",
+    "address": "ঠিকানা",
+    "city": "শহর",
+    "state": "রাজ্য",
+    "zip_code": "পিন কোড",
+    "save_changes": "পরিবর্তন সংরক্ষণ করুন",
+    "account_details": "অ্যাকাউন্ট বিবরণ"
+  },
+  "auth": {
+    "login_title": "লগইন",
+    "register_title": "অ্যাকাউন্ট তৈরি করুন",
+    "email": "ইমেইল",
+    "password": "পাসওয়ার্ড",
+    "confirm_password": "পাসওয়ার্ড নিশ্চিত করুন",
+    "forgot_password": "পাসওয়ার্ড ভুলে গেছেন?",
+    "no_account": "অ্যাকাউন্ট নেই?",
+    "have_account": "আগে থেকে অ্যাকাউন্ট আছে?",
+    "login_success": "লগইন সফল",
+    "register_success": "রেজিস্ট্রেশন সফল"
+  },
+  "admin": {
+    "title": "অ্যাডমিন ড্যাশবোর্ড",
+    "orders": "অর্ডার ব্যবস্থাপনা",
+    "imports": "CSV ইমপোর্ট",
+    "upload_csv": "CSV আপলোড করুন",
+    "import_logs": "ইমপোর্ট লগ",
+    "approve_cancel": "বাতিল অনুমোদন করুন",
+    "reject": "প্রত্যাখ্যান করুন"
+  }
+}

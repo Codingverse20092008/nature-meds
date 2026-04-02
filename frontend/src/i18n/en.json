@@ -1,0 +1,85 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Go Back"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Medicines",
+    "cart": "Cart",
+    "orders": "Orders",
+    "profile": "Profile",
+    "admin": "Admin",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "home": {
+    "hero_title": "Buy Medicines Online",
+    "hero_subtitle": "Your trusted online pharmacy for genuine medicines",
+    "featured": "Featured Products",
+    "categories": "Browse by Category"
+  },
+  "products": {
+    "title": "Medicines",
+    "search_placeholder": "Search medicines...",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock",
+    "add_to_cart": "Add to Cart",
+    "requires_prescription": "Requires Prescription"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "free_shipping": "Free shipping on orders above ₹299"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shipping_address": "Shipping Address",
+    "payment_method": "Payment Method",
+    "cod": "Cash on Delivery",
+    "place_order": "Place Order",
+    "order_success": "Order placed successfully!"
+  },
+  "orders": {
+    "title": "Your Orders",
+    "empty": "No orders yet",
+    "view_details": "View Details",
+    "cancel_order": "Cancel Order",
+    "cancel_reason": "Select reason for cancellation",
+    "cancel_success": "Order cancelled successfully",
+    "reason_ordered_by_mistake": "Ordered by mistake",
+    "reason_found_cheaper": "Found cheaper elsewhere",
+    "reason_delivery_delay": "Delay in delivery",
+    "reason_no_longer_needed": "No longer needed",
+    "reason_other": "Other",
+    "status_placed": "Placed",
+    "status_confirmed": "Confirmed",
+    "status_shipped": "Shipped",
+    "status_delivered": "Delivered",
+    "status_cancelled": "Cancelled"
+  },
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit Profile",
+    "language": "Preferred Language",
+    "change_password": "Change Password",
+    "verify_email": "Verify Email"
+  },
+  "language": {
+    "en": "English",
+    "hi": "Hindi",
+    "bn": "Bengali",
+    "ta": "Tamil"
+  }
+}

@@ -1,0 +1,3 @@
+name,category,price,stock,expiry_date,requires_prescription,sku,manufacturer,description
+Paracetamol 500mg,Analgesics,49.99,120,2027-12-31,false,PARA500,Runtime Pharma,Fast relief tablet
+Expired Test Syrup,Cough & Cold,89.50,20,2024-01-01,true,EXPIRED001,Runtime Pharma,Expired validation row

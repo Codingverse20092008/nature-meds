@@ -1,0 +1,59 @@
+# Render Blueprint - Node.js + Express + TypeScript + Turso
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: nature-meds-api
+    env: node
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: node dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Database - set via Render dashboard (sensitive)
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      # Security - set via Render dashboard (sensitive)
+      - key: JWT_SECRET
+        generateValue: true
+      # AI Configuration - set via Render dashboard (sensitive)
+      - key: SCITELY_API_KEY
+        sync: false
+      - key: SCITELY_BASE_URL
+        value: https://api.scitely.com/v1
+      - key: SCITELY_MODEL
+        value: qwen3-max
+      # Frontend URL - update after deploying frontend
+      - key: FRONTEND_URL
+        value: https://naturemeds.vercel.app
+      - key: CORS_ORIGIN
+        value: https://naturemeds.vercel.app
+      # Email Configuration - set via Render dashboard (sensitive)
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      # Rate Limiting
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+
+# Note: 
+# 1. Deploy this with 'sync: false' for sensitive values, then set them in Render dashboard
+# 2. Run migrations manually after first deploy: npm run migrate
+# 3. Update FRONTEND_URL and CORS_ORIGIN after deploying the frontend

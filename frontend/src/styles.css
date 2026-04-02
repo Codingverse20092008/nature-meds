@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eff8ff;
+  --color-brand-100: #d9ecff;
+  --color-brand-200: #b8ddff;
+  --color-brand-300: #88c5ff;
+  --color-brand-400: #4ba2ff;
+  --color-brand-500: #197dff;
+  --color-brand-600: #115fd5;
+  --color-brand-700: #104cab;
+  --color-mint-50: #edfdf7;
+  --color-mint-100: #d3f8ea;
+  --color-mint-200: #abefd8;
+  --color-mint-300: #75dfbd;
+  --color-mint-400: #35c79d;
+  --color-mint-500: #16a679;
+  --color-surface-0: #ffffff;
+  --color-surface-50: #f7fbff;
+  --color-surface-100: #edf4fb;
+  --color-surface-200: #dce9f6;
+  --color-ink-900: #11243c;
+  --color-ink-700: #3a4c66;
+  --color-ink-500: #66768d;
+  --shadow-glass: 0 20px 60px rgba(17, 36, 60, 0.1);
+  --shadow-soft: 0 12px 30px rgba(25, 125, 255, 0.12);
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(25,125,255,0.12),_transparent_35%),linear-gradient(180deg,#f9fcff_0%,#f4fbff_45%,#f7fffb_100%)] text-[var(--color-ink-900)] antialiased;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/70 bg-white/70 backdrop-blur-xl;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .badge-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/80 px-4 py-2 text-sm font-medium text-brand-700 shadow-[0_8px_25px_rgba(25,125,255,0.08)];
+  }
+
+  .title-display {
+    @apply font-[var(--font-display)] text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl lg:text-6xl;
+  }
+
+  .card-shell {
+    @apply rounded-[28px] border border-white/80 bg-white/80 p-5 backdrop-blur-xl;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .input-shell {
+    @apply w-full rounded-2xl border border-brand-100 bg-white/85 px-4 py-3 text-sm text-ink-900 shadow-[0_10px_25px_rgba(17,36,60,0.06)] outline-none transition focus:border-brand-300 focus:ring-4 focus:ring-brand-100/60;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#197dff,#16a679)] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(22,166,121,0.25)] transition hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-brand-100 bg-white/80 px-5 py-3 text-sm font-semibold text-ink-900 transition hover:border-brand-300 hover:bg-white;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-2xl bg-surface-200/70;
+  }
+
+  .toast-shell {
+    @apply rounded-2xl border border-white/70 bg-white/90 text-sm text-ink-900 shadow-[0_20px_40px_rgba(17,36,60,0.12)] backdrop-blur-xl;
+  }
+}

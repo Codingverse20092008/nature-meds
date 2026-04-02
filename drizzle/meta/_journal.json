@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1775058473645,
+      "tag": "0000_optimal_ben_urich",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1775061324845,
+      "tag": "0001_whole_vulture",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1775068171941,
+      "tag": "0002_same_johnny_blaze",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1775120524962,
+      "tag": "0003_many_jack_power",
+      "breakpoints": true
+    }
+  ]
+}

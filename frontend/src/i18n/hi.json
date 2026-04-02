@@ -1,0 +1,85 @@
+{
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "कुछ गलत हो गया",
+    "success": "सफल",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "save": "सहेजें",
+    "delete": "हटाएं",
+    "close": "बंद करें",
+    "back": "वापस जाएं"
+  },
+  "nav": {
+    "home": "होम",
+    "products": "दवाइयाँ",
+    "cart": "कार्ट",
+    "orders": "ऑर्डर",
+    "profile": "प्रोफाइल",
+    "admin": "एडमिन",
+    "logout": "लॉग आउट",
+    "login": "लॉग इन"
+  },
+  "home": {
+    "hero_title": "ऑनलाइन दवाइयाँ खरीदें",
+    "hero_subtitle": "असली दवाइयों के लिए आपका विश्वसनीय ऑनलाइन फार्मेसी",
+    "featured": "फीचर्ड प्रोडक्ट्स",
+    "categories": "श्रेणी के अनुसार ब्राउज़ करें"
+  },
+  "products": {
+    "title": "दवाइयाँ",
+    "search_placeholder": "दवाइयाँ खोजें...",
+    "in_stock": "स्टॉक में",
+    "out_of_stock": "स्टॉक में नहीं",
+    "add_to_cart": "कार्ट में डालें",
+    "requires_prescription": "प्रिस्क्रिप्शन आवश्यक"
+  },
+  "cart": {
+    "title": "आपका कार्ट",
+    "empty": "आपका कार्ट खाली है",
+    "subtotal": "सबटोटल",
+    "shipping": "शिपिंग",
+    "total": "कुल",
+    "checkout": "चेकआउट करें",
+    "free_shipping": "₹299 से ऊपर के ऑर्डर पर फ्री शिपिंग"
+  },
+  "checkout": {
+    "title": "चेकआउट",
+    "shipping_address": "शिपिंग पता",
+    "payment_method": "भुगतान विधि",
+    "cod": "कैश ऑन डिलीवरी",
+    "place_order": "ऑर्डर करें",
+    "order_success": "ऑर्डर सफलतापूर्वक दिया गया!"
+  },
+  "orders": {
+    "title": "आपके ऑर्डर",
+    "empty": "अभी तक कोई ऑर्डर नहीं",
+    "view_details": "विवरण देखें",
+    "cancel_order": "ऑर्डर रद्द करें",
+    "cancel_reason": "रद्द करने का कारण चुनें",
+    "cancel_success": "ऑर्डर सफलतापूर्वक रद्द किया गया",
+    "reason_ordered_by_mistake": "गलती से ऑर्डर किया",
+    "reason_found_cheaper": "कहीं सस्ता मिला",
+    "reason_delivery_delay": "डिलीवरी में देरी",
+    "reason_no_longer_needed": "अब जरूरत नहीं",
+    "reason_other": "अन्य",
+    "status_placed": "दिया गया",
+    "status_confirmed": "पुष्टि हुआ",
+    "status_shipped": "भेज दिया",
+    "status_delivered": "पहुंच गया",
+    "status_cancelled": "रद्द हो गया"
+  },
+  "profile": {
+    "title": "प्रोफाइल",
+    "edit": "प्रोफाइल संपादित करें",
+    "language": "पसंदीदा भाषा",
+    "change_password": "पासवर्ड बदलें",
+    "verify_email": "ईमेल वेरिफाई करें"
+  },
+  "language": {
+    "en": "अंग्रेज़ी",
+    "hi": "हिंदी",
+    "bn": "बंगाली",
+    "ta": "तमिल"
+  }
+}
