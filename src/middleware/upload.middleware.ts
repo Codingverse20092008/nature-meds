@@ -31,7 +31,7 @@ export const upload = multer({
       return;
     }
 
-    cb(new Error('Only CSV files are allowed'));
+    cb(null, false);
   },
   limits: {
     fileSize: Number.parseInt(env.MAX_FILE_SIZE, 10),
@@ -51,7 +51,7 @@ export function handleMulterError(
   }
 
   if (err instanceof multer.MulterError) {
-    if (err.code === 'LIMIT_FILE_SIZE') {
+    if ((err as multer.MulterError).code === 'LIMIT_FILE_SIZE') {
       res.status(400).json({
         success: false,
         message: `File size exceeds the maximum allowed limit of ${env.MAX_FILE_SIZE} bytes`,

@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -54,7 +54,7 @@ const limiter = rateLimit({
 app.use('/api/v1', limiter);
 
 // Health check endpoint
-app.get('/health', (_req, res) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({
     success: true,
     status: 'healthy',
@@ -73,7 +73,7 @@ app.use('/api/v1/orders', ordersRoutes);
 app.use('/api/v1/ai', aiRoutes);
 
 // API documentation route
-app.get('/api/v1', (_req, res) => {
+app.get('/api/v1', (_req: Request, res: Response) => {
   res.json({
     success: true,
     message: 'Nature Meds API',
