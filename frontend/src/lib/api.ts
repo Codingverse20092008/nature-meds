@@ -68,9 +68,9 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401) {
       useAuthStore.getState().clearSession();
-    }
-
-    if (isNetworkError || (error.response && error.response.status >= 500)) {
+      toast.error('Session expired. Please login again.');
+    } else {
+      // Show error toast for all other errors (400, 500, Network, etc.)
       toast.error(message, { duration: 5000 });
     }
 

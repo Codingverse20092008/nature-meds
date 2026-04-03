@@ -223,6 +223,21 @@ export function useRegister() {
     },
     onSuccess: async (session) => {
       setSession(session);
+      const guestCart = useGuestCartStore.getState().items;
+      const clearGuestCart = useGuestCartStore.getState().clear;
+      if (guestCart.length > 0) {
+        try {
+          await api.post('/api/v1/cart/sync', {
+            items: guestCart.map((item) => ({
+              productId: item.product.id,
+              quantity: item.quantity,
+            })),
+          });
+          clearGuestCart();
+        } catch (error) {
+          console.error('[RegisterSync] Failed to sync guest cart:', error);
+        }
+      }
       await queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       await queryClient.invalidateQueries({ queryKey: ['cart'] });
     },

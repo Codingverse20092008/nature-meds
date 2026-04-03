@@ -90,16 +90,11 @@ export function AuthPage() {
                       email: form.email,
                       password: form.password,
                     });
-                    toast.success('Account created. Verification email sent.');
+                    toast.success('Account created successfully');
                   }
-
                   navigate(redirectTo);
-                } catch (error: unknown) {
-                  const message =
-                    error && typeof error === 'object' && 'response' in error
-                      ? (error as { response?: { data?: { message?: string } } }).response?.data?.message
-                      : 'Authentication failed';
-                  toast.error(message ?? 'Authentication failed');
+                } catch (error: any) {
+                  // Error handled by interceptor
                 }
               }}
             >
