@@ -85,7 +85,7 @@ async function buildCartResponse(userId: number) {
   };
 }
 
-async function upsertCartLine(userId: number, productId: number, quantity: number) {
+async function upsertCartLine(userId: number, productId: number, quantity: number, mode: 'add' | 'set' = 'set') {
   const db = getDatabase();
   const cart = await ensureCart(userId);
 
@@ -104,12 +104,12 @@ async function upsertCartLine(userId: number, productId: number, quantity: numbe
     throw new NotFoundError('Product is not available');
   }
 
-  if (quantity <= 0) {
-    throw new BadRequestError('Quantity must be greater than zero');
+  if (quantity <= 0 && mode === 'set') {
+    return removeCartItemByProduct(userId, productId);
   }
 
-  if (quantity > product.stock) {
-    throw new BadRequestError(`Only ${product.stock} units available for ${product.name}`);
+  if (quantity <= 0 && mode === 'add') {
+    throw new BadRequestError('Quantity must be greater than zero');
   }
 
   const [existing] = await db
@@ -118,11 +118,21 @@ async function upsertCartLine(userId: number, productId: number, quantity: numbe
     .where(and(eq(cartItems.cartId, cart.id), eq(cartItems.productId, productId)))
     .limit(1);
 
+  const finalQuantity = mode === 'add' && existing ? existing.quantity + quantity : quantity;
+
+  if (finalQuantity > product.stock) {
+    throw new BadRequestError(
+      `Only ${product.stock} units available for ${product.name}.${
+        existing ? ` You already have ${existing.quantity} in cart.` : ''
+      }`
+    );
+  }
+
   if (existing) {
     await db
       .update(cartItems)
       .set({
-        quantity,
+        quantity: finalQuantity,
         updatedAt: new Date().toISOString(),
       })
       .where(eq(cartItems.id, existing.id));
@@ -130,14 +140,11 @@ async function upsertCartLine(userId: number, productId: number, quantity: numbe
     await db.insert(cartItems).values({
       cartId: cart.id,
       productId,
-      quantity,
+      quantity: finalQuantity,
     });
   }
 
-  await db
-    .update(carts)
-    .set({ updatedAt: new Date().toISOString() })
-    .where(eq(carts.id, cart.id));
+  await db.update(carts).set({ updatedAt: new Date().toISOString() }).where(eq(carts.id, cart.id));
 }
 
 export async function getCart(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -162,7 +169,7 @@ export async function addToCart(req: Request, res: Response, next: NextFunction)
       throw new BadRequestError('Valid productId is required');
     }
 
-    await upsertCartLine(user.id, numericProductId, numericQuantity);
+    await upsertCartLine(user.id, numericProductId, numericQuantity, 'add');
     const cart = await buildCartResponse(user.id);
     res.status(201).json({ success: true, message: 'Item added to cart', data: cart });
   } catch (error) {
@@ -181,11 +188,7 @@ export async function updateCartItem(req: Request, res: Response, next: NextFunc
       throw new BadRequestError('Valid productId is required');
     }
 
-    if (quantity <= 0) {
-      await removeCartItemByProduct(user.id, productId);
-    } else {
-      await upsertCartLine(user.id, productId, quantity);
-    }
+    await upsertCartLine(user.id, productId, quantity, 'set');
 
     const cart = await buildCartResponse(user.id);
     res.json({ success: true, message: 'Cart updated', data: cart });
@@ -253,7 +256,7 @@ export async function syncCart(req: Request, res: Response, next: NextFunction):
       const allowed = new Set(existingProducts.map((product) => product.id));
       for (const [productId, quantity] of uniqueByProduct.entries()) {
         if (allowed.has(productId)) {
-          await upsertCartLine(user.id, productId, quantity);
+          await upsertCartLine(user.id, productId, quantity, 'add');
         }
       }
     }

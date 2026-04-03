@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import { and, asc, desc, eq, gt, gte, inArray, like, lt, lte, or, sql } from 'drizzle-orm';
 import { getDatabase } from '../config/database.js';
 import { categories, products } from '../db/schema.js';
+import { BadRequestError, NotFoundError } from '../middleware/error.middleware.js';
 
 function asString(value: unknown, fallback = ''): string {
   return typeof value === 'string' ? value : fallback;
@@ -405,6 +406,45 @@ export async function getExpiringSoonProducts(req: Request, res: Response, next:
     res.json({ success: true, data, days });
   } catch (error) {
     console.error('[ProductController] getExpiringSoonProducts error:', error);
+    next(error);
+  }
+}
+
+export async function adminUpdateStock(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const db = getDatabase();
+    const productId = Number.parseInt(asString(req.params.id), 10);
+    const { stock } = req.body as Record<string, unknown>;
+
+    if (!Number.isFinite(productId)) {
+      throw new BadRequestError('Valid product ID is required');
+    }
+
+    const numericStock = Number(stock);
+    if (!Number.isFinite(numericStock) || numericStock < 0) {
+      throw new BadRequestError('Stock must be a non-negative number');
+    }
+
+    const result = await db
+      .update(products)
+      .set({
+        stock: numericStock,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(products.id, productId))
+      .returning();
+
+    if (result.length === 0) {
+      throw new NotFoundError('Product not found');
+    }
+
+    res.json({
+      success: true,
+      message: 'Stock updated successfully',
+      data: result[0],
+    });
+  } catch (error) {
+    console.error('[ProductController] adminUpdateStock error:', error);
     next(error);
   }
 }

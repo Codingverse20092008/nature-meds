@@ -142,20 +142,15 @@ export async function createOrder(
       });
     }
 
-    // Update product stock
+    // Atomic update product stock
     for (const item of items) {
-      const product = await db
-        .select({ stock: products.stock })
-        .from(products)
-        .where(eq(products.id, item.productId))
-        .limit(1);
-
-      if (product.length > 0) {
-        await db
-          .update(products)
-      .set({ stock: product[0].stock - Number(item.quantity) })
-          .where(eq(products.id, item.productId));
-      }
+      await db
+        .update(products)
+        .set({ 
+          stock: sql`${products.stock} - ${Number(item.quantity)}`,
+          updatedAt: new Date().toISOString()
+        })
+        .where(eq(products.id, item.productId));
     }
 
     // Clear active cart after successful order placement

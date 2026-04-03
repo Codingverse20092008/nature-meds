@@ -11,6 +11,7 @@ import {
   getLowStockProducts,
   getOutOfStockProducts,
   getExpiringSoonProducts,
+  adminUpdateStock,
 } from '../controllers/products.controller.js';
 
 const router = Router();
@@ -26,6 +27,7 @@ router.get('/featured', asyncHandler(getFeaturedProducts));
 router.get('/admin/low-stock', requireAuth, requireAdmin, asyncHandler(getLowStockProducts));
 router.get('/admin/out-of-stock', requireAuth, requireAdmin, asyncHandler(getOutOfStockProducts));
 router.get('/admin/expiring-soon', requireAuth, requireAdmin, asyncHandler(getExpiringSoonProducts));
+router.patch('/items/:id/stock', requireAuth, requireAdmin, asyncHandler(adminUpdateStock));
 
 router.get('/:id', asyncHandler(getProduct));
 
