@@ -12,7 +12,7 @@ import { useDocumentMeta } from '../lib/meta';
 export function ProductsPage() {
   const [category, setCategory] = useState('');
   const [searchInput, setSearchInput] = useState('');
-  const [maxPrice, setMaxPrice] = useState(5000);
+  const [maxPrice, setMaxPrice] = useState(50000);
   const [page, setPage] = useState(1);
   const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
   const categoryMenuRef = useRef<HTMLDivElement | null>(null);
@@ -20,7 +20,7 @@ export function ProductsPage() {
   const products = useProducts({
     page,
     category: category || undefined,
-    maxPrice,
+    maxPrice: maxPrice === 50000 ? undefined : maxPrice,
     limit: 24,
   });
 
@@ -29,6 +29,7 @@ export function ProductsPage() {
   const searchedProducts = useSearchProducts(deferredSearch, 24);
   const data = deferredSearch.trim().length > 1 ? searchedProducts.data : products.data?.data;
   const isLoading = deferredSearch.trim().length > 1 ? searchedProducts.isLoading : products.isLoading;
+  const isError = deferredSearch.trim().length > 1 ? searchedProducts.isError : products.isError;
   const pagination = products.data?.pagination;
   useDocumentMeta('Shop medicines', 'Search and filter pharmacy products from your live backend inventory.');
 
@@ -130,8 +131,8 @@ export function ProductsPage() {
             <input
               type="range"
               min="100"
-              max="5000"
-              step="50"
+              max="50000"
+              step="500"
               value={maxPrice}
               onChange={(event) => setMaxPrice(Number(event.target.value))}
               className="w-full accent-brand-500"
@@ -144,7 +145,7 @@ export function ProductsPage() {
             onClick={() =>
               startTransition(() => {
                 setCategory('');
-                setMaxPrice(5000);
+                setMaxPrice(50000);
                 setSearchInput('');
               })
             }
@@ -197,6 +198,17 @@ export function ProductsPage() {
 
           {isLoading ? (
             <ProductGridSkeleton />
+          ) : isError ? (
+            <div className="card-shell rounded-[30px] px-8 py-16 text-center">
+              <h3 className="text-xl font-semibold text-ink-900">Network Connection Issue</h3>
+              <p className="mt-3 text-sm text-ink-500">
+                The database server might be sleeping or unreachable right now.
+                Please wait a moment and retry to allow the cold start.
+              </p>
+              <button onClick={() => window.location.reload()} className="btn-primary mt-6">
+                Try Again
+              </button>
+            </div>
           ) : data && data.length > 0 ? (
             <>
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">

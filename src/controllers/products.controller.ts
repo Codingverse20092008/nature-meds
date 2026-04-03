@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { and, asc, desc, eq, gt, inArray, like, lt, or, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, inArray, like, lt, lte, or, sql } from 'drizzle-orm';
 import { getDatabase } from '../config/database.js';
 import { categories, products } from '../db/schema.js';
 
@@ -36,12 +36,12 @@ export async function getProducts(req: Request, res: Response, next: NextFunctio
 
     const minPrice = asString(req.query.minPrice);
     if (minPrice) {
-      conditions.push(gt(products.price, Number.parseFloat(minPrice)));
+      conditions.push(gte(products.price, Number.parseFloat(minPrice)));
     }
 
     const maxPrice = asString(req.query.maxPrice);
     if (maxPrice) {
-      conditions.push(lt(products.price, Number.parseFloat(maxPrice)));
+      conditions.push(lte(products.price, Number.parseFloat(maxPrice)));
     }
 
     const requiresPrescription = asString(req.query.requiresPrescription);
@@ -286,7 +286,7 @@ export async function getFeaturedProducts(req: Request, res: Response, next: Nex
       })
       .from(products)
       .leftJoin(categories, eq(products.categoryId, categories.id))
-      .where(and(eq(products.isFeatured, true), eq(products.isActive, true), gt(products.stock, 0)))
+      .where(and(eq(products.isFeatured, true), eq(products.isActive, true)))
       .orderBy(desc(products.stock), asc(products.name))
       .limit(limit);
 
@@ -314,7 +314,7 @@ export async function getFeaturedProducts(req: Request, res: Response, next: Nex
         })
         .from(products)
         .leftJoin(categories, eq(products.categoryId, categories.id))
-        .where(and(eq(products.isActive, true), gt(products.stock, 0)))
+        .where(eq(products.isActive, true))
         .orderBy(desc(products.stock), asc(products.name))
         .limit(limit);
     }

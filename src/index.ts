@@ -26,11 +26,13 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const corsOrigin = env.CORS_ORIGIN || env.FRONTEND_URL || '*';
 app.use(cors({
-  origin: env.NODE_ENV === 'production' ? corsOrigin.split(',').map(s => s.trim()) : '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: function (_origin, callback) {
+    // Allow any origin - necessary for dynamic Vercel domains
+    callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   credentials: true,
 }));
 
