@@ -21,7 +21,6 @@ export function ProductsPage() {
     page,
     category: category || undefined,
     maxPrice,
-    inStock: true,
     limit: 24,
   });
 
