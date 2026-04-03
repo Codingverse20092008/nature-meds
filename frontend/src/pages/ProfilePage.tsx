@@ -1,20 +1,15 @@
 import { motion } from 'framer-motion';
-import { LockKeyhole, Mail, MapPin, Phone, Save, UserRound, Globe } from 'lucide-react';
+import { LockKeyhole, Mail, MapPin, Phone, Save, UserRound } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { PageHeader } from '../components/PageHeader';
-import { api } from '../lib/api';
 import { useAuthUser, useChangePassword, useUpdateProfile } from '../lib/queries';
 import { useDocumentMeta } from '../lib/meta';
-import { languages } from '../i18n';
 
 export function ProfilePage() {
-  const { t, i18n } = useTranslation();
   const profileQuery = useAuthUser();
   const updateProfile = useUpdateProfile();
   const changePassword = useChangePassword();
-  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language || 'en');
   const [profileForm, setProfileForm] = useState({
     firstName: '',
     lastName: '',
@@ -157,37 +152,7 @@ export function ProfilePage() {
             </form>
           </div>
 
-          <div className="card-shell rounded-[32px] bg-[linear-gradient(180deg,rgba(25,125,255,0.08),rgba(22,166,121,0.08))]">
-            <div className="flex items-center gap-3">
-              <Globe size={20} className="text-brand-500" />
-              <div>
-                <h3 className="text-xl font-semibold text-ink-900">{t('profile.language')}</h3>
-                <p className="mt-1 text-sm text-ink-600">Select your preferred language for the app</p>
-              </div>
-            </div>
-            <select
-              value={selectedLanguage}
-              onChange={async (e) => {
-                const newLang = e.target.value;
-                setSelectedLanguage(newLang);
-                i18n.changeLanguage(newLang);
-                localStorage.setItem('i18nextLng', newLang);
-                try {
-                  await api.patch('/api/v1/users/me/language', { language: newLang });
-                  toast.success('Language updated');
-                } catch {
-                  toast.error('Failed to save language preference');
-                }
-              }}
-              className="mt-4 w-full rounded-2xl border border-brand-100 bg-white px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-200"
-            >
-              {languages.map((lang) => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.nativeName} ({lang.name})
-                </option>
-              ))}
-            </select>
-          </div>
+
         </motion.section>
       </div>
     </div>
