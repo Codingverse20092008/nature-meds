@@ -31,7 +31,7 @@ export function OrdersPage() {
                     {new Date(order.createdAt).toLocaleString()} · {displayStatus(order.status)}
                   </p>
                   <p className="mt-2 text-sm text-ink-700">
-                    {order.items.length} item{order.items.length === 1 ? '' : 's'} · {formatCurrencyINR(order.total)}
+                    {(order.items?.length ?? 0)} item{(order.items?.length ?? 0) === 1 ? '' : 's'} · {formatCurrencyINR(order.total)}
                   </p>
                 </div>
                 <Link to={`/orders/${order.id}`} className="btn-secondary">
