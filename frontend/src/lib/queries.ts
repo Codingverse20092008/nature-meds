@@ -595,3 +595,29 @@ export function useRejectCancel() {
     },
   });
 }
+
+export function useLowStockProducts(threshold = 10) {
+  return useQuery({
+    queryKey: ['low-stock', threshold],
+    queryFn: async () => {
+      const { data } = await api.get<{ success: boolean; data: Product[] }>(`/api/v1/products/admin/low-stock?threshold=${threshold}`);
+      return data.data;
+    },
+  });
+}
+
+export function useUpdateStock() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ productId, stock }: { productId: number; stock: number }) => {
+      const { data } = await api.patch<{ success: boolean; data: Product }>(`/api/v1/products/items/${productId}/stock`, { stock });
+      return data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['product'] });
+      queryClient.invalidateQueries({ queryKey: ['low-stock'] });
+    },
+  });
+}

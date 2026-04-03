@@ -68,9 +68,17 @@ export function ProductCard({ product }: { product: Product }) {
             </p>
           </div>
 
-          <div className="mt-5 space-y-2 text-sm text-ink-500">
-            <p>Manufacturer: {product.manufacturer ?? 'Verified supplier'}</p>
-            <p>Stock: {product.stock} available</p>
+          <div className="mt-5 space-y-2 text-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-ink-500">Manufacturer: {product.manufacturer ?? 'Verified supplier'}</span>
+              {product.stock <= 0 ? (
+                <span className="font-bold text-red-500">Out of Stock</span>
+              ) : product.stock < 10 ? (
+                <span className="font-bold text-amber-500">Only {product.stock} left</span>
+              ) : (
+                <span className="text-ink-500">{product.stock} in stock</span>
+              )}
+            </div>
           </div>
 
           <div className="mt-6 flex items-center justify-between">
@@ -80,14 +88,23 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
             <button
               type="button"
-              className="btn-primary px-4 py-2.5"
-              onClick={async () => {
+              className={`btn-primary px-4 py-2.5 ${product.stock <= 0 ? 'cursor-not-allowed opacity-50 grayscale' : ''}`}
+              disabled={product.stock <= 0 || addToCart.isPending}
+              onClick={async (event) => {
+                event.preventDefault();
+                if (product.stock <= 0) return;
                 await addToCart.mutateAsync({ product, quantity: 1 });
                 toast.success(`${product.name} added to cart`);
               }}
             >
-              <ShoppingCart size={16} />
-              Add
+              {product.stock <= 0 ? (
+                'Empty'
+              ) : (
+                <>
+                  <ShoppingCart size={16} />
+                  Add
+                </>
+              )}
             </button>
           </div>
         </div>

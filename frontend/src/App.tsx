@@ -21,6 +21,7 @@ const OrderSuccessPage = lazy(() =>
   import('./pages/OrderSuccessPage').then((module) => ({ default: module.OrderSuccessPage }))
 );
 const AdminPage = lazy(() => import('./pages/AdminPage').then((module) => ({ default: module.AdminPage })));
+const AdminStockPage = lazy(() => import('./pages/AdminStockPage').then((module) => ({ default: module.AdminStockPage })));
 const AuthPage = lazy(() => import('./pages/AuthPage').then((module) => ({ default: module.AuthPage })));
 const ProfilePage = lazy(() => import('./pages/ProfilePage').then((module) => ({ default: module.ProfilePage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then((module) => ({ default: module.ContactPage })));
@@ -86,6 +87,14 @@ export default function App() {
                 element={
                   <ProtectedRoute role="admin">
                     <AdminPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/inventory"
+                element={
+                  <ProtectedRoute role="admin">
+                    <AdminStockPage />
                   </ProtectedRoute>
                 }
               />
