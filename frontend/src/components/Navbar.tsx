@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, LogOut, Menu, Pill, Search, ShoppingBag, ShieldCheck, UserRound } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, Search, ShoppingBag, ShieldCheck, UserRound } from 'lucide-react';
 import { useDeferredValue, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { formatCurrencyINR, getCategoryLabel } from '../lib/catalog';
@@ -33,8 +33,8 @@ export function Navbar() {
       <div className="section-shell">
         <div className="glass-panel flex items-center justify-between gap-4 rounded-[28px] px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex size-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#197dff,#16a679)] text-white shadow-[0_12px_30px_rgba(25,125,255,0.25)]">
-              <Pill size={20} />
+            <div className="flex h-11 items-center justify-center overflow-hidden rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+              <img src="/logo.png" alt="Nature Meds Logo" className="h-full w-auto object-cover" />
             </div>
             <div>
               <p className="font-[var(--font-display)] text-lg font-semibold">Nature Meds</p>
