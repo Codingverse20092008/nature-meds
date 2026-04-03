@@ -53,6 +53,14 @@ const limiter = rateLimit({
 // Apply rate limiting to API routes
 app.use('/api/v1', limiter);
 
+// Root route for better UX
+app.get('/', (_req: Request, res: Response) => {
+  res.json({
+    success: true,
+    message: 'API is running 🚀',
+  });
+});
+
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
   res.json({
