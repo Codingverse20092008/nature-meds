@@ -196,6 +196,12 @@ export function AdminPage() {
                     <p className="mt-2 text-sm text-ink-700">
                       {order.items?.length ?? 0} items · {formatCurrencyINR(order.total)}
                     </p>
+                    <div className="mt-2 text-xs font-medium text-brand-600 bg-brand-50/50 px-3 py-2 rounded-xl border border-brand-100 flex flex-col gap-1">
+                      <span className="uppercase tracking-wider opacity-60">Delivery Address</span>
+                      <p className="text-ink-900 leading-5">
+                        {order.shippingAddress}, {order.shippingCity}, {order.shippingState} {order.shippingZip}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
