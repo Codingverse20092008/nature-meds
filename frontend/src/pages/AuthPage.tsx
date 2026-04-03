@@ -42,6 +42,9 @@ export function AuthPage() {
       <div className="mx-auto max-w-4xl">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} className="card-shell rounded-[32px] bg-[linear-gradient(180deg,rgba(25,125,255,0.08),rgba(22,166,121,0.08))] p-8">
+            <div className="mb-6 flex size-16 items-center justify-center overflow-hidden rounded-[24px] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+              <img src="/logo.png" alt="Nature Meds" className="h-full w-auto object-cover" />
+            </div>
             <h3 className="font-[var(--font-display)] text-3xl font-semibold text-ink-900">Your pharmacy account in one place.</h3>
             <p className="mt-4 text-sm leading-7 text-ink-600">
               Sign in to keep your cart, profile, and pharmacy preferences available across refreshes.

@@ -6,8 +6,11 @@ export function Footer() {
       <div className="glass-panel rounded-[28px] px-6 py-8 text-sm text-ink-500">
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
           <div>
+            <div className="mb-4 flex size-12 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+              <img src="/logo.png" alt="Nature Meds" className="h-full w-auto object-cover" />
+            </div>
             <p className="font-[var(--font-display)] text-2xl font-semibold text-ink-900">Nature Meds</p>
-            <p className="mt-3 max-w-md leading-7">Trusted online pharmacy platform</p>
+            <p className="mt-2 max-w-md leading-7">Trusted online pharmacy platform</p>
             <p className="mt-4 max-w-xl text-xs leading-6 text-ink-500">
               We do not provide medical advice. Consult a doctor for proper treatment.
             </p>
