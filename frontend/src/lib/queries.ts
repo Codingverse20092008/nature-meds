@@ -621,3 +621,46 @@ export function useUpdateStock() {
     },
   });
 }
+
+export function useRequestReturn() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ orderId, reason }: { orderId: number; reason: string }) => {
+      const { data } = await api.post<{ success: boolean; message: string }>(`/api/v1/orders/${orderId}/request-return`, { reason });
+      return data;
+    },
+    onSuccess: async (_, variables) => {
+      await queryClient.invalidateQueries({ queryKey: ['orders'] });
+      await queryClient.invalidateQueries({ queryKey: ['orders', String(variables.orderId)] });
+    },
+  });
+}
+
+export function useApproveReturn() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (orderId: number) => {
+      const { data } = await api.post<{ success: boolean; message: string }>(`/api/v1/orders/${orderId}/approve-return`);
+      return data;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['admin-orders'] });
+    },
+  });
+}
+
+export function useRejectReturn() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ orderId, reason }: { orderId: number; reason: string }) => {
+      const { data } = await api.post<{ success: boolean; message: string }>(`/api/v1/orders/${orderId}/reject-return`, { reason });
+      return data;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['admin-orders'] });
+    },
+  });
+}

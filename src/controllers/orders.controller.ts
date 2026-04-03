@@ -430,8 +430,23 @@ export async function getAllOrders(
     }
 
     const orderList = await db
-      .select()
+      .select({
+        id: orders.id,
+        orderNumber: orders.orderNumber,
+        userId: orders.userId,
+        status: orders.status,
+        total: orders.total,
+        createdAt: orders.createdAt,
+        shippingAddress: orders.shippingAddress,
+        shippingCity: orders.shippingCity,
+        shippingState: orders.shippingState,
+        shippingZip: orders.shippingZip,
+        firstName: users.firstName,
+        lastName: users.lastName,
+        userEmail: users.email,
+      })
       .from(orders)
+      .leftJoin(users, eq(orders.userId, users.id))
       .where(conditions.length > 0 ? and(...conditions) : undefined)
       .orderBy(desc(orders.createdAt))
       .limit(limit)
@@ -674,3 +689,170 @@ export async function rejectCancel(
     next(error);
   }
 }
+
+/**
+ * Request order return (user)
+ */
+export async function requestReturn(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const db = getDatabase();
+    const authReq = req as AuthRequest;
+    const orderId = Number.parseInt(asString(req.params.id), 10);
+    const { reason } = req.body;
+
+    if (!reason) {
+      throw new BadRequestError('Return reason is required');
+    }
+
+    const order = await db
+      .select()
+      .from(orders)
+      .where(and(eq(orders.id, orderId), eq(orders.userId, authReq.user!.id)))
+      .limit(1);
+
+    if (order.length === 0) {
+      throw new NotFoundError('Order not found');
+    }
+
+    if (order[0].status !== 'delivered') {
+      throw new BadRequestError('Only delivered orders can be returned');
+    }
+
+    // Check if 48 hours have passed (Return Policy)
+    const deliveredAt = order[0].deliveredAt ? new Date(order[0].deliveredAt) : new Date(order[0].updatedAt);
+    const now = new Date();
+    const hoursSinceDelivery = (now.getTime() - deliveredAt.getTime()) / (1000 * 60 * 60);
+
+    if (hoursSinceDelivery > 48) {
+      throw new BadRequestError('Returns are only allowed within 48 hours of delivery');
+    }
+
+    await db
+      .update(orders)
+      .set({
+        status: 'return_requested',
+        returnReason: asString(reason),
+        returnRequestedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(orders.id, orderId));
+
+    res.json({
+      success: true,
+      message: 'Return request submitted successfully. We will review it within 24-48 hours.',
+    });
+  } catch (error) {
+    console.error('[OrderController] requestReturn error:', error);
+    next(error);
+  }
+}
+
+/**
+ * Approve order return (admin)
+ */
+export async function approveReturn(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const db = getDatabase();
+    const orderId = Number.parseInt(asString(req.params.id), 10);
+
+    const order = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.id, orderId))
+      .limit(1);
+
+    if (order.length === 0) {
+      throw new NotFoundError('Order not found');
+    }
+
+    if (order[0].status !== 'return_requested') {
+      throw new BadRequestError('No pending return request for this order');
+    }
+
+    await db
+      .update(orders)
+      .set({
+        status: 'returned',
+        returnedAt: new Date().toISOString(),
+        returnApprovedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(orders.id, orderId));
+
+    // Restore stock if it was a valid physical return
+    const items = await db
+      .select()
+      .from(orderItems)
+      .where(eq(orderItems.orderId, orderId));
+
+    for (const item of items) {
+      await db
+        .update(products)
+        .set({ stock: sql`${products.stock} + ${Number(item.quantity)}` })
+        .where(eq(products.id, item.productId));
+    }
+
+    res.json({
+      success: true,
+      message: 'Return approved and stock restored',
+    });
+  } catch (error) {
+    console.error('[OrderController] approveReturn error:', error);
+    next(error);
+  }
+}
+
+/**
+ * Reject order return (admin)
+ */
+export async function rejectReturn(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const db = getDatabase();
+    const orderId = Number.parseInt(asString(req.params.id), 10);
+    const { reason } = req.body;
+
+    const order = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.id, orderId))
+      .limit(1);
+
+    if (order.length === 0) {
+      throw new NotFoundError('Order not found');
+    }
+
+    if (order[0].status !== 'return_requested') {
+      throw new BadRequestError('No pending return request for this order');
+    }
+
+    await db
+      .update(orders)
+      .set({
+        status: 'return_rejected',
+        notes: reason ? `Return Rejected: ${reason}` : 'Return Rejected by administrator',
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(orders.id, orderId));
+
+    res.json({
+      success: true,
+      message: 'Return request rejected',
+    });
+  } catch (error) {
+    console.error('[OrderController] rejectReturn error:', error);
+    next(error);
+  }
+}
+

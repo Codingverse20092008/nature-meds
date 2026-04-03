@@ -11,6 +11,9 @@ import {
   updateOrderStatus,
   approveCancel,
   rejectCancel,
+  requestReturn,
+  approveReturn,
+  rejectReturn,
 } from '../controllers/orders.controller.js';
 
 const router = Router();
@@ -22,10 +25,13 @@ router.get('/admin/stats', requireAdmin, asyncHandler(getOrderStats));
 router.patch('/:id/status', requireAdmin, asyncHandler(updateOrderStatus));
 router.post('/:id/approve-cancel', requireAdmin, asyncHandler(approveCancel));
 router.post('/:id/reject-cancel', requireAdmin, asyncHandler(rejectCancel));
+router.post('/:id/approve-return', requireAdmin, asyncHandler(approveReturn));
+router.post('/:id/reject-return', requireAdmin, asyncHandler(rejectReturn));
 
 router.post('/', asyncHandler(createOrder));
 router.get('/', asyncHandler(getUserOrders));
 router.get('/:id', asyncHandler(getOrderById));
 router.post('/:id/cancel-request', asyncHandler(cancelRequest));
+router.post('/:id/request-return', asyncHandler(requestReturn));
 
 export default router;

@@ -96,7 +96,7 @@ export type AuthUser = {
   createdAt?: string;
 };
 
-export type OrderStatus = 'placed' | 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancel_requested' | 'cancelled' | 'refunded';
+export type OrderStatus = 'placed' | 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancel_requested' | 'cancelled' | 'refunded' | 'return_requested' | 'returned' | 'return_rejected';
 
 export type OrderItem = {
   id: number;
@@ -136,9 +136,16 @@ export type Order = {
   cancellationReason?: string | null;
   cancelRequestedAt?: string | null;
   cancelApprovedAt?: string | null;
+  returnRequestedAt?: string | null;
+  returnApprovedAt?: string | null;
+  returnedAt?: string | null;
+  returnReason?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  userEmail?: string | null;
   createdAt: string;
   updatedAt: string;
-  items: OrderItem[];
+  items?: OrderItem[];
 };
 
 export type AiMedicineReference = {

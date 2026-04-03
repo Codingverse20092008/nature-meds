@@ -152,7 +152,7 @@ export const orders = sqliteTable(
       .references(() => users.id, { onDelete: 'cascade' }),
     prescriptionId: integer('prescription_id').references(() => prescriptions.id, { onDelete: 'set null' }),
     status: text('status', {
-      enum: ['placed', 'pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancel_requested', 'cancelled', 'refunded'],
+      enum: ['placed', 'pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancel_requested', 'cancelled', 'refunded', 'return_requested', 'returned', 'return_rejected'],
     })
       .notNull()
       .default('placed'),
@@ -177,6 +177,10 @@ export const orders = sqliteTable(
     cancellationReason: text('cancellation_reason'),
     cancelRequestedAt: text('cancel_requested_at'),
     cancelApprovedAt: text('cancel_approved_at'),
+    returnRequestedAt: text('return_requested_at'),
+    returnApprovedAt: text('return_approved_at'),
+    returnedAt: text('returned_at'),
+    returnReason: text('return_reason'),
     notes: text('notes'),
     createdAt: text('created_at')
       .notNull()

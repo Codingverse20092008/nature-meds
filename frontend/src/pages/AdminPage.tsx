@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
 import { TableSkeleton } from '../components/Skeletons';
 import { formatCurrencyINR } from '../lib/catalog';
-import { useAdminOrders, useImportLogDetails, useImportLogs, useImportStats, useRetryImport, useUpdateOrderStatus, useUploadCsv, useApproveCancel, useRejectCancel } from '../lib/queries';
+import { useAdminOrders, useImportLogDetails, useImportLogs, useImportStats, useRetryImport, useUpdateOrderStatus, useUploadCsv, useApproveCancel, useRejectCancel, useApproveReturn, useRejectReturn } from '../lib/queries';
 import { useDocumentMeta } from '../lib/meta';
 import { useAuthStore } from '../store/authStore';
 
@@ -22,6 +22,8 @@ export function AdminPage() {
   const updateOrderStatus = useUpdateOrderStatus();
   const approveCancel = useApproveCancel();
   const rejectCancel = useRejectCancel();
+  const approveReturn = useApproveReturn();
+  const rejectReturn = useRejectReturn();
   const logs = useImportLogs({ status: statusFilter || undefined });
   const stats = useImportStats();
   const logDetails = useImportLogDetails(selectedLogId);
@@ -189,9 +191,10 @@ export function AdminPage() {
               <div key={order.id} className="rounded-[26px] border border-surface-100 bg-surface-50 px-4 py-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <p className="font-semibold text-ink-900">{order.orderNumber}</p>
+                    <p className="font-semibold text-ink-900">{order.orderNumber} · {order.firstName} {order.lastName}</p>
+                    <p className="mt-1 text-sm text-brand-600 font-medium">{order.userEmail}</p>
                     <p className="mt-1 text-sm text-ink-500">
-                      {new Date(order.createdAt).toLocaleString()} · {order.status}
+                      {new Date(order.createdAt).toLocaleString()} · {order.status.replace('_', ' ')}
                     </p>
                     <p className="mt-2 text-sm text-ink-700">
                       {order.items?.length ?? 0} items · {formatCurrencyINR(order.total)}
@@ -227,6 +230,8 @@ export function AdminPage() {
                           className="btn-secondary border-red-200 text-red-600 hover:bg-red-50"
                           disabled={rejectCancel.isPending}
                           onClick={async () => {
+                            const reason = window.prompt('Reason for rejection:');
+                            if (reason === null) return;
                             try {
                               await rejectCancel.mutateAsync(order.id);
                               toast.success('Cancellation rejected');
@@ -236,6 +241,48 @@ export function AdminPage() {
                           }}
                         >
                           Reject ✕
+                        </button>
+                      </>
+                    ) : order.status === 'return_requested' ? (
+                      <>
+                        <div className="mr-4 text-left">
+                          <p className="text-[10px] uppercase font-bold text-amber-600">Return Reason</p>
+                          <p className="text-xs text-ink-700 italic border-l-2 border-amber-300 pl-2">
+                             "{(order as any).returnReason ?? 'No reason provided'}"
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-secondary border-green-200 text-green-600 hover:bg-green-50"
+                          disabled={approveReturn.isPending}
+                          onClick={async () => {
+                            if (!window.confirm('Approve return and RESTORE STOCK for this order?')) return;
+                            try {
+                              await approveReturn.mutateAsync(order.id);
+                              toast.success('Return approved & stock restored');
+                            } catch {
+                              toast.error('Failed to approve return');
+                            }
+                          }}
+                        >
+                          Approve Return ✓
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-secondary border-red-200 text-red-600 hover:bg-red-50"
+                          disabled={rejectReturn.isPending}
+                          onClick={async () => {
+                            const reason = window.prompt('Reason for return rejection:');
+                            if (reason === null) return;
+                            try {
+                              await rejectReturn.mutateAsync({ orderId: order.id, reason });
+                              toast.success('Return rejected');
+                            } catch {
+                              toast.error('Failed to reject return');
+                            }
+                          }}
+                        >
+                          Reject Return ✕
                         </button>
                       </>
                     ) : (
