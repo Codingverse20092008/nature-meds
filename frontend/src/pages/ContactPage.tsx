@@ -19,14 +19,14 @@ export function ContactPage() {
             <Mail size={18} />
           </div>
           <h2 className="text-xl font-semibold text-ink-900">Email support</h2>
-          <p className="mt-3 text-sm leading-6 text-ink-600">For platform help, account support, or general questions, contact us at support@naturemeds.com.</p>
+          <p className="mt-3 text-sm leading-6 text-ink-600">For platform help, account support, or general questions, contact us at <a href="mailto:mahafuzalamkhan25@gmail.com" className="text-brand-600 hover:underline">mahafuzalamkhan25@gmail.com</a>.</p>
         </div>
         <div className="card-shell rounded-[30px]">
           <div className="mb-4 flex size-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
             <Phone size={18} />
           </div>
           <h2 className="text-xl font-semibold text-ink-900">Phone support</h2>
-          <p className="mt-3 text-sm leading-6 text-ink-600">Call our customer support line at +91 1800 000 000 during business hours for help with orders and account issues.</p>
+          <p className="mt-3 text-sm leading-6 text-ink-600">Call our customer support line at <a href="tel:+918515020851" className="text-brand-600 hover:underline">+91 85150 20851</a> or <a href="tel:+917501842551" className="text-brand-600 hover:underline">+91 75018 42551</a> during business hours for help with orders and account issues.</p>
         </div>
       </div>
     </div>
