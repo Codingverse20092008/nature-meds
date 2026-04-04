@@ -215,10 +215,18 @@ export async function getCategories(_req: Request, res: Response, next: NextFunc
       })
       .from(categories)
       .leftJoin(products, eq(categories.id, products.categoryId))
-      .groupBy(categories.id)
+      .groupBy(categories.id, categories.name, categories.slug, categories.description, categories.parentCategoryId)
       .orderBy(asc(categories.name));
 
-    res.json({ success: true, data });
+    // Deduplicate by name (in case of duplicates in DB)
+    const uniqueCategories = data.reduce((acc: typeof data, cat) => {
+      if (!acc.find((c) => c.name.toLowerCase() === cat.name.toLowerCase())) {
+        acc.push(cat);
+      }
+      return acc;
+    }, []);
+
+    res.json({ success: true, data: uniqueCategories });
   } catch (error) {
     console.error('[ProductController] getCategories error:', error);
     next(error);
