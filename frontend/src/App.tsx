@@ -25,6 +25,7 @@ const AdminStockPage = lazy(() => import('./pages/AdminStockPage').then((module)
 const AuthPage = lazy(() => import('./pages/AuthPage').then((module) => ({ default: module.AuthPage })));
 const ProfilePage = lazy(() => import('./pages/ProfilePage').then((module) => ({ default: module.ProfilePage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then((module) => ({ default: module.ContactPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then((module) => ({ default: module.AboutPage })));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage').then((module) => ({ default: module.PrivacyPolicyPage })));
 const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage').then((module) => ({ default: module.VerifyEmailPage })));
 
@@ -101,6 +102,7 @@ export default function App() {
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             </Routes>
           </Suspense>

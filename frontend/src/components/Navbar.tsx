@@ -26,6 +26,8 @@ export function Navbar() {
   const navItems = [
     { label: 'Home', to: '/' },
     { label: 'Shop', to: '/products' },
+    { label: 'About Us', to: '/about' },
+    { label: 'Contact', to: '/contact' },
   ];
 
   return (
