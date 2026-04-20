@@ -295,7 +295,7 @@ export async function getFeaturedProducts(req: Request, res: Response, next: Nex
       })
       .from(products)
       .leftJoin(categories, eq(products.categoryId, categories.id))
-      .where(and(eq(products.isFeatured, true), eq(products.isActive, true)))
+      .where(and(eq(products.isFeatured, true), eq(products.isActive, true), sql`${products.imageUrl} IS NOT NULL AND ${products.imageUrl} != ''`))
       .orderBy(desc(products.stock), asc(products.name))
       .limit(limit);
 
@@ -323,7 +323,7 @@ export async function getFeaturedProducts(req: Request, res: Response, next: Nex
         })
         .from(products)
         .leftJoin(categories, eq(products.categoryId, categories.id))
-        .where(eq(products.isActive, true))
+        .where(and(eq(products.isActive, true), sql`${products.imageUrl} IS NOT NULL AND ${products.imageUrl} != ''`))
         .orderBy(desc(products.stock), asc(products.name))
         .limit(limit);
     }
