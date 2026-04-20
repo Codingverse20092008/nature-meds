@@ -47,18 +47,22 @@ export function ProductDetailsPage() {
         description={product.description ?? 'Detailed medicine information from your live pharmacy product record.'}
       />
 
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="grid gap-8 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -14 }}
           animate={{ opacity: 1, x: 0 }}
-          className="card-shell flex min-h-[360px] items-center justify-center rounded-[34px] bg-[linear-gradient(180deg,rgba(25,125,255,0.08),rgba(22,166,121,0.08))]"
+          className="card-shell relative flex min-h-[500px] items-center justify-center rounded-[40px] bg-gradient-to-br from-blue-50/50 to-emerald-50/50 p-8 shadow-[0_8px_32px_rgba(25,125,255,0.08)] hover:shadow-[0_12px_48px_rgba(25,125,255,0.12)] transition-shadow duration-300"
         >
-          <MedicineImage src={product.imageUrl} alt={product.name} className="flex size-52 items-center justify-center rounded-[40px] shadow-[0_20px_50px_rgba(25,125,255,0.12)]" />
+          <MedicineImage 
+            src={product.imageUrl} 
+            alt={product.name} 
+            className="flex size-80 items-center justify-center rounded-[32px] shadow-[0_24px_64px_rgba(25,125,255,0.15)] transition-transform duration-300 hover:scale-[1.02]" 
+          />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-          <div className="card-shell rounded-[30px]">
-            <div className="mb-5 flex flex-wrap gap-3">
+          <div className="card-shell rounded-[32px] p-6">
+            <div className="mb-6 flex flex-wrap gap-3">
               <span className="badge-pill">{getCategoryLabel(product.category)}</span>
               {product.requiresPrescription && (
                 <span className="badge-pill border-amber-200 bg-amber-50/80 text-amber-700">
@@ -68,7 +72,7 @@ export function ProductDetailsPage() {
               )}
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-5 sm:grid-cols-2">
               <Info label="Price" value={formatCurrencyINR(product.price)} />
               <Info label="Stock" value={`${product.stock} units`} />
               <Info label="Manufacturer" value={product.manufacturer ?? 'Verified supplier'} icon={<Factory size={15} />} />
@@ -79,18 +83,18 @@ export function ProductDetailsPage() {
 
             <button
               type="button"
-              className="btn-primary mt-6 w-full sm:w-auto"
+              className="btn-primary mt-8 w-full sm:w-auto px-8 py-4 text-base"
               onClick={async () => {
                 await addToCart.mutateAsync({ product, quantity: 1 });
                 toast.success(`${product.name} added to cart`);
               }}
             >
-              <ShoppingCart size={16} />
+              <ShoppingCart size={18} />
               Add to cart
             </button>
           </div>
 
-          <div className="card-shell rounded-[30px]">
+          <div className="card-shell rounded-[32px] p-6">
             <h3 className="text-lg font-semibold text-ink-900">Safety and fulfillment notes</h3>
             <ul className="mt-4 space-y-3 text-sm leading-6 text-ink-600">
               <li>Expiry is shown from the live inventory record imported through your CSV pipeline.</li>

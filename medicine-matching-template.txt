@@ -1,0 +1,72 @@
+MEDICINE IMAGE MATCHING TEMPLATE
+==================================
+
+Instructions:
+1. Open view-medicines.html in your browser to see all 51 photos
+2. Look at each photo and identify the medicine name on the packaging
+3. Write the medicine name next to each photo number below
+4. If a photo is unclear or not a medicine, write "SKIP"
+5. Save this file and share it back when done
+
+Format: Photo # = Medicine Name
+
+Photo 1  = Acetis SP (Aceclofenac + Paracetamol + Serratiopeptidase)
+Photo 2  = Trontis-MD 8 (Ondansetron 8 mg)
+Photo 3  = Lectis 5 (Levocetirizine Hydrochloride 5 mg)
+Photo 4  = Acetis CCP (Aceclofenac + Paracetamol + Phenylephrine HCl + Cetirizine HCl + Caffeine)
+Photo 5  = Atprox D 250 (Domperidone + Naproxen Sodium)
+Photo 6  = Evitis Plus (Omega-3 Fatty Acid + Wheat Germ Oil + Vitamin E)
+Photo 7  = Lulitis Cream (Luliconazole 1% w/w)
+Photo 8  = Clearmix-KT6 Ointment (Ketoconazole + Iodochlorhydroxyquinoline + Tolnaftate + Neomycin + Clobetasol Propionate + Dexpanthenol)
+Photo 9  = Clearmix-Plus Cream (Itraconazole + Ofloxacin + Ornidazole + Clobetasol Propionate)
+Photo 10 = Caredic-MR (Paracetamol + Diclofenac Potassium + Chlorzoxazone)
+Photo 11 = Povilan Ointment (Povidone Iodine)
+Photo 12 = Betlan 8 mg (Betahistine 8 mg)
+Photo 13 = Febusta-40 (Febuxostat 40 mg)
+Photo 14 = Atortis-10 (Atorvastatin 10 mg)
+Photo 15 = LABETIS (Labetalol 100 mg)
+Photo 16 = BILASTIS-20 (Bilastine 20 mg)
+Photo 17 = Acetis SR-200 (Aceclofenac Sustained Release 200 mg)
+Photo 18 = Cholecal 60K (Cholecalciferol Vitamin D3 60,000 IU)
+Photo 19 = ACETIS R-SR (Rabeprazole Sodium EC + Aceclofenac SR)
+Photo 20 = Solotis-16 (Methylprednisolone 16 mg)
+Photo 21 = CaleGold Soap (Calendula + Echinacea + Marigold + Berberis Aq. + Thuja + Aloe Vera + Vitamin E)
+Photo 22 = Zirotis-500 (Azithromycin + Lactic Acid Bacillus)
+Photo 23 = Actotis Ear Drops (Beclomethasone Dipropionate + Clotrimazole + Gentamicin + Lignocaine HCl)
+Photo 24 = Linezo-600 MG (Linezolid 600 mg)
+Photo 25 = Moxitis Eye Drops (Moxifloxacin Ophthalmic Solution)
+Photo 26 = ATWAX Ear Drops (Paradichlorobenzene + Benzocaine + Chlorbutol + Turpentine Oil)
+Photo 27 = NOTEAR Eye Drops (Sodium Carboxymethyl Cellulose 0.5% w/v)
+Photo 28 = TERFITIS-250 (Terbinafine Hydrochloride 250 mg)
+Photo 29 = Evitis 400 (Vitamin E Tocopheryl Acetate 400 mg)
+Photo 30 = Dydrotis (Dydrogesterone 10 mg)
+Photo 31 = Atpent-HP Kit (Clarithromycin + Amoxicillin + Pantoprazole)
+Photo 32 = Tamlotis-D (Tamsulosin + Dutasteride)
+Photo 33 = Rosutin-10 (Rosuvastatin 10 mg)
+Photo 34 = Drotapen-M (Drotaverine + Mefenamic Acid)
+Photo 35 = Atpent-D (Pantoprazole + Domperidone)
+Photo 36 = Ceffex AZ (Cefixime + Azithromycin + Lactic Acid Bacillus)
+Photo 37 = Amoxytis CV 625 (Amoxicillin + Potassium Clavulanate)
+Photo 38 = Atzyme (Pancreatin + Diastase + Pepsin + Vitamin B Complex + Lactobacillus)
+Photo 39 = Chymotis-ABR (Trypsin + Bromelain + Rutoside + Aceclofenac)
+Photo 40 = Esozo-DSR (Esomeprazole + Domperidone SR)
+Photo 41 = Atpent-DSR (Pantoprazole + Domperidone SR)
+Photo 42 = SKIP
+Photo 43 = Cetmon-L (Levocetirizine + Montelukast)
+Photo 44 = Rabitis-DSP (Rabeprazole + Domperidone SR)
+Photo 45 = Oflotis-M Syrup (Ofloxacin + Metronidazole + Simethicone)
+Photo 46 = Oflotis-O (Ofloxacin + Ornidazole)
+Photo 47 = Acetis-P (Aceclofenac + Paracetamol)
+Photo 48 = Zirotis-250 (Azithromycin 250 mg)
+Photo 49 = SKIP
+Photo 50 = Trontis-4 (Ondansetron 4 mg)
+Photo 51 = 
+
+==================================
+TIPS:
+- Write the EXACT name as it appears on the packaging
+- Include dosage if visible (e.g., "Paracetamol 500mg" not just "Paracetamol")
+- If multiple medicines in one photo, list them separated by commas
+- If photo is blurry/unclear, write "UNCLEAR"
+- If photo is not a medicine (packaging, person, etc.), write "SKIP"
+==================================

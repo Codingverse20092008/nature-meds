@@ -56,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
           <MedicineImage
             src={product.imageUrl}
             alt={product.name}
-            className="mb-5 flex h-18 w-18 items-center justify-center rounded-3xl"
+            className="mb-5 flex h-64 w-full items-center justify-center rounded-3xl sm:h-72 lg:h-80"
           />
 
           <div className="space-y-3">
